@@ -6,7 +6,7 @@ provisioner:
   name: chef_zero
   always_update_cookbooks: true
   multiple_converge: 2
-  force_idempotency: true
+  enforce_idempotency: true
   product_name: chef
 
 verifier:
