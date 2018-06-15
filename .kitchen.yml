@@ -7,16 +7,22 @@ provisioner:
   always_update_cookbooks: true
   multiple_converge: 2
   force_idempotency: true
-  product: chef
-  product_version: 12
+  product_name: chef
 
 verifier:
   name: inspec
 
 platforms:
-  - name: debian-9
+  - name: debian-9-chef-12
     driver:
       image: stretch.qcow2
+    provisioner:
+      product_version: 12
+  - name: debian-9-chef-14
+    driver:
+      image: stretch.qcow2
+    provisioner:
+      product_version: 14
 
 suites:
   - name: default
