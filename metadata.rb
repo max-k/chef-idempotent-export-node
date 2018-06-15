@@ -1,0 +1,6 @@
+name             'idempotent-export-node'
+maintainer       'Thomas Sarboni'
+maintainer_email 'max-k@post.com'
+license          'Apache 2.0'
+description      'Exports node attributes to a json file'
+version          '1.0.0'
