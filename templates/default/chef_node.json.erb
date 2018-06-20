@@ -1,5 +1,5 @@
 <%
-    root_fields = ['counters', 'uptime_seconds', 'uptime', 'idletime_seconds', 'idletime', 'ohai_time', 'sessions']
+    root_fields = ['counters', 'uptime_seconds', 'uptime', 'idletime_seconds', 'idletime', 'ohai_time', 'sessions', 'lsb', 'packages']
     root_fields.each do |field|
         node.automatic.delete(field)
     end
@@ -24,6 +24,11 @@
     if fs_identifier == "filesystem2"
         node.automatic['filesystem'] = node.automatic['filesystem2']
         node.automatic.delete('filesystem2')
+    end
+    node.automatic['network']['interfaces'].each do |iface|
+        if iface.has_key?('neighbour_inet6')
+            node.automatic['network']['interfaces'][iface].delete('neighbour_inet6')
+        end
     end
 %>
 <%= JSON.pretty_generate(@node) %>
