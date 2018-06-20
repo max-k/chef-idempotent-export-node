@@ -25,8 +25,8 @@
         node.automatic['filesystem'] = node.automatic['filesystem2']
         node.automatic.delete('filesystem2')
     end
-    node.automatic['network']['interfaces'].each do |iface|
-        if iface.has_key?('neighbour_inet6')
+    node.automatic['network']['interfaces'].each do |iface, iface_data|
+        if iface_data.has_key?('neighbour_inet6')
             node.automatic['network']['interfaces'][iface].delete('neighbour_inet6')
         end
     end
