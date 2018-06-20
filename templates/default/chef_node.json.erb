@@ -1,5 +1,5 @@
 <%
-    root_fields = ['counters', 'uptime_seconds', 'uptime', 'idletime_seconds', 'idletime', 'ohai_time', 'sessions', 'lsb', 'packages']
+    root_fields = ['counters', 'uptime_seconds', 'uptime', 'idletime_seconds', 'idletime', 'ohai_time', 'sessions', 'lsb', 'packages', 'etc']
     root_fields.each do |field|
         node.automatic.delete(field)
     end
