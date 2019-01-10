@@ -31,4 +31,4 @@
         end
     end
 %>
-<%= JSON.pretty_generate(@node) %>
+<%= Chef::JSONCompat.to_json_pretty(node) %>
