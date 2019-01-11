@@ -31,7 +31,7 @@
         node.automatic['filesystem'] = node.automatic['filesystem2']
         node.automatic.delete('filesystem2')
     end
-    if node.default['idempotent-export-node']['skip-network']
+    if node.manual['idempotent-export-node']['skip-network']
         node.automatic.delete('network')
     else
         node.automatic['network']['interfaces'].each do |iface, iface_data|
