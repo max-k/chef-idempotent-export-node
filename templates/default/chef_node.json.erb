@@ -32,7 +32,7 @@
         node.automatic.delete('filesystem2')
     end
     if node.normal['idempotent-export-node']['skip-network']
-        node.automatic.delete('network')
+        node.automatic['network'].delete('interfaces')
     else
         node.automatic['network']['interfaces'].each do |iface, iface_data|
             if iface_data.has_key?('neighbour_inet6')
