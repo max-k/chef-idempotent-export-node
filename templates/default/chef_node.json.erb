@@ -5,6 +5,11 @@
     end
     node.automatic['sysconf'].delete('_AVPHYS_PAGES')
     node.automatic['memory'] = { 'total' => node.automatic['memory']['total'] }
+    node.automatic.kernel['modules'].each do |mod, mod_data|
+        if mod.start_with?('ebtable_', 'ip_', 'ip6_', 'ipt_', 'iptable_', 'ip6table_', 'nf_', 'x_', , 'xt_')
+        node.automatic.kernel['modules'][mod].delete('size')
+        node.automatic.kernel['modules'][mod].delete('refcount')
+    end
     fs_fields = ['kb_used', 'kb_available', 'percent_used', 'inodes_used', 'inodes_available', 'inodes_percent_used']
     if node.automatic['filesystem'].has_key?('by_device')
         fs_identifier = 'filesystem'
@@ -25,9 +30,13 @@
         node.automatic['filesystem'] = node.automatic['filesystem2']
         node.automatic.delete('filesystem2')
     end
-    node.automatic['network']['interfaces'].each do |iface, iface_data|
-        if iface_data.has_key?('neighbour_inet6')
-            node.automatic['network']['interfaces'][iface].delete('neighbour_inet6')
+    if node.default['idempotent-export-node']['skip-network']
+        node.automatic.delete('network')
+    else
+        node.automatic['network']['interfaces'].each do |iface, iface_data|
+            if iface_data.has_key?('neighbour_inet6')
+                node.automatic['network']['interfaces'][iface].delete('neighbour_inet6')
+            end
         end
     end
 %>
