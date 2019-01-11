@@ -5,10 +5,10 @@
     end
     node.automatic['sysconf'].delete('_AVPHYS_PAGES')
     node.automatic['memory'] = { 'total' => node.automatic['memory']['total'] }
-    node.automatic.kernel['modules'].each do |mod, mod_data|
+    node.automatic['kernel']['modules'].each do |mod, mod_data|
         if mod.start_with?('ebtable_', 'ip_', 'ip6_', 'ipt_', 'iptable_', 'ip6table_', 'nf_', 'x_', 'xt_')
-            node.automatic.kernel['modules'][mod].delete('size')
-            node.automatic.kernel['modules'][mod].delete('refcount')
+            node.automatic['kernel']['modules'][mod].delete('size')
+            node.automatic['kernel']['modules'][mod].delete('refcount')
         end
     end
     fs_fields = ['kb_used', 'kb_available', 'percent_used', 'inodes_used', 'inodes_available', 'inodes_percent_used']
